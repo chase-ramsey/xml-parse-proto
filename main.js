@@ -16,13 +16,15 @@ testDataWired.addEventListener("load", function(event) {
   allItems.forEach(function(item) {
     let title = item.getElementsByTagName("title");
     let author = item.getElementsByTagName("creator");
-    let newItem = new NewItem(title[0].textContent, author[0].textContent);
+    let link = item.getElementsByTagName("link");
+    console.log("link: ", link);
+    let newItem = new NewItem(title[0].textContent, author[0].textContent, link[0].textContent);
     itemsWired.push(newItem);
   });
   let buildHTML = `<h3>Wired</h3>`;
-  itemsWired.forEach(function(item) {
-    buildHTML += `<p>${item.title}</p><p> - ${item.author}</p>`
-  })
+  for (var i = 0; i < 10; i++) {
+    buildHTML += `<p><a href="${itemsWired[i].link}">${itemsWired[i].title}</a></p><p>${itemsWired[i].author}</p>`
+  }
   outputWired.innerHTML = buildHTML;
 })
 
@@ -36,13 +38,14 @@ testDataPitchfork.addEventListener("load", function(event) {
   allItems.forEach(function(item) {
     let title = item.getElementsByTagName("title");
     let author = item.getElementsByTagName("creator");
-    let newItem = new NewItem(title[0].textContent, author[0].textContent);
+    let link = item.getElementsByTagName("link");
+    let newItem = new NewItem(title[0].textContent, author[0].textContent, link[0].textContent);
     itemsPitchfork.push(newItem);
   });
   let buildHTML = `<h3>Pitchfork</h3>`;
-  itemsPitchfork.forEach(function(item) {
-    buildHTML += `<p>${item.title}</p><p> - ${item.author}</p>`
-  })
+  for (var i = 0; i < 10; i++) {
+    buildHTML += `<p><a href="${itemsPitchfork[i].link}">${itemsPitchfork[i].title}</a></p><p>${itemsPitchfork[i].author}</p>`
+  }
   outputPitchfork.innerHTML = buildHTML;
 })
 
@@ -56,17 +59,19 @@ testDataNYTimes.addEventListener("load", function(event) {
   allItems.forEach(function(item) {
     let title = item.getElementsByTagName("title");
     let author = item.getElementsByTagName("creator");
-    let newItem = new NewItem(title[0].textContent, author[0].textContent);
+    let link = item.getElementsByTagName("link");
+    let newItem = new NewItem(title[0].textContent, author[0].textContent, link[0].textContent);
     itemsNYTimes.push(newItem);
   });
   let buildHTML = `<h3>NYTimes</h3>`;
-  itemsNYTimes.forEach(function(item) {
-    buildHTML += `<p>${item.title}</p><p> - ${item.author}</p>`
-  })
+  for (var i = 0; i < 10; i++) {
+    buildHTML += `<p><a href="${itemsNYTimes[i].link}">${itemsNYTimes[i].title}</a></p><p>${itemsNYTimes[i].author}</p>`
+  }
   outputNYTimes.innerHTML = buildHTML;
 })
 
-function NewItem(title, author) {
+function NewItem(title, author, link) {
   this.title = title;
   this.author = author;
+  this.link = link;
 }
