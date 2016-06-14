@@ -11,6 +11,7 @@ testDataWired.open("GET", "http://www.wired.com/feed/");
 testDataWired.send();
 testDataWired.addEventListener("load", function(event) {
   const testXML = this.responseXML;
+  console.log("testXML: ", testXML);
   const allItemData = testXML.getElementsByTagName("item");
   const allItems = Array.from(allItemData);
   allItems.forEach(function(item) {
@@ -35,6 +36,7 @@ testDataPitchfork.open("GET", "http://pitchfork.com/rss/news/");
 testDataPitchfork.send();
 testDataPitchfork.addEventListener("load", function(event) {
   const testXML = this.responseXML;
+  console.log("testXML: ", testXML);
   const allItemData = testXML.getElementsByTagName("item");
   const allItems = Array.from(allItemData);
   allItems.forEach(function(item) {
@@ -68,12 +70,9 @@ testDataNYTimes.addEventListener("load", function(event) {
     let link = item.getElementsByTagName("link");
     let image = "";
     let media = item.getElementsByTagName("content");
-    console.log("media: ", media);
     if (media.length !== 0) {
       let mediaParse = media[0].outerHTML.match(/url="([^\"]*)"/g);
-      console.log("mediaParse: ", mediaParse);
       let image = mediaParse[0].replace(/url=|"/g, "");
-      console.log("image: ", image);
       let newItem = new NewItem(title[0].textContent, author[0].textContent, link[0].textContent, image);
       itemsNYTimes.push(newItem);
     }
